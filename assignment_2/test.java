@@ -13,6 +13,10 @@ public class test extends Applet {
 		this.setSize(new Dimension(800, 800));
 		Button zoom_in = new Button("zoom_in");
 		Button zoom_out = new Button("zoom_out");
+		add(zoom_in);
+		add(zoom_out);
+		zoom_in.addActionListener(this);
+		zoom_out.addActionListener(this);
 	}
 
 	public void paint(Graphics g) {
@@ -33,7 +37,7 @@ public class test extends Applet {
 		// drawing Grid
 		// horizontal lines
 		g.setColor(Color.black);
-		for (int y = 0; y <= originY - scale; y += scale) {
+		for (int y = originY - scale; y >= 0; y -= scale) {
 			g.drawLine(0, y, getWidth(), y);
 		}
 
@@ -42,7 +46,7 @@ public class test extends Applet {
 		}
 
 		// vertical lines
-		for (int x = 0; x <= originX - scale; x += scale) {
+		for (int x = originX - scale; x >= 0; x -= scale) {
 			g.drawLine(x, 0, x, getHeight());
 		}
 
@@ -50,12 +54,8 @@ public class test extends Applet {
 			g.drawLine(x, 0, x, getHeight());
 		}
 
-		// draw origin point with red color
-		g.setColor(Color.red);
-		g.drawLine(originX, originY, originX, originY); // Origin point
-
 		// draw rectangle at (2,1) with variable size to find optimum size
-		g.drawRect(originX + 2, originY - 1, width, height);
+		g.drawRect(originX + 2 * scale, originY - 1 * scale, width, height);
 	}
 
 	public void actionPerformed(ActionEvent e) {

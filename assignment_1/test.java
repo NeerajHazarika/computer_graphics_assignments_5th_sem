@@ -25,7 +25,7 @@ public class test extends Applet {
 		// drawing Grid
 		// horizontal lines
 		g.setColor(Color.black);
-		for (int y = 0; y <= originY - scale; y += scale) {
+		for (int y = originY - scale; y >= 0; y -= scale) {
 			g.drawLine(0, y, getWidth(), y);
 		}
 
@@ -34,16 +34,12 @@ public class test extends Applet {
 		}
 
 		// vertical lines
-		for (int x = 0; x <= originX - scale; x += scale) {
+		for (int x = originX - scale; x >= 0; x -= scale) {
 			g.drawLine(x, 0, x, getHeight());
 		}
 
 		for (int x = originX + scale; x <= getWidth(); x += scale) {
 			g.drawLine(x, 0, x, getHeight());
 		}
-
-		// draw origin point with red color
-		g.setColor(Color.red);
-		g.drawLine(originX, originY, originX, originY); // Origin point
 	}
 }
