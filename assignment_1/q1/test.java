@@ -8,13 +8,7 @@ public class test extends Applet
 
 	public void init()
 	{
-	    	setBackground(Color.yellow);
- 		Button zoom_in = new Button("Zoom In");   
-		Button zoom_out = new Button("Zoom Out");
-		add(zoom_in);
-                add(zoom_out);
-                zoom_in.addActionListener(this);
-                zoom_out.addActionListener(this);
+	    	setBackground(Color.green);
 	}
 
 	public void paint(Graphics g)
@@ -31,7 +25,7 @@ public class test extends Applet
 		// drawing Grid
 		// horizontal lines
                 g.setColor(Color.black); 
-                for(int i=x+scale; i<getWidth(); i+=scale){
+                for(int i=originX+scale; i<getWidth(); i+=scale){
                 	g.drawLine(i,0,i,getHeight());
                 }
                 
@@ -40,7 +34,7 @@ public class test extends Applet
                 }
                 
 		// vertical lines
-                for(int i=y+scale; i<getHeight(); i+=scale){
+                for(int i=originY+scale; i<getHeight(); i+=scale){
                 	g.drawLine(0,i,getWidth(),i);
                 }
                 
@@ -48,13 +42,4 @@ public class test extends Applet
                 	g.drawLine(0,originY-i,getWidth(),originY-i);
                 }
 	}
-
-        public void actionPerformed(ActionEvent e) {
-                String st = e.getActionCommand();
-                if(st.equals("Zoom In"))
-                	scale += 4;
-                else
-                	scale -= 4;
-                repaint();
-        }
 }
