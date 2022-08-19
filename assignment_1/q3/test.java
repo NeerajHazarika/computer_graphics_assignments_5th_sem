@@ -34,22 +34,24 @@ public class test extends Applet implements ActionListener {
 		g.drawLine(0, originY, getWidth(), originY);
 
 		// drawing Grid
-		// horizontal lines
+		// vertical lines
 		g.setColor(Color.black);
+		// right half vertical lines
 		for (int i = originX + scale; i < getWidth(); i += scale) {
 			g.drawLine(i, 0, i, getHeight());
 		}
-
-		for (int i = scale; i < getWidth(); i += scale) {
+		// left half vertical lines
+		for (int i = scale; originX - i >= 0; i += scale) {
 			g.drawLine(originX - i, 0, originX - i, getHeight());
 		}
 
-		// vertical lines
+		// horizontal lines
+		// right half horizontal lines
 		for (int i = originY + scale; i < getHeight(); i += scale) {
 			g.drawLine(0, i, getWidth(), i);
 		}
-
-		for (int i = scale; i < getHeight(); i += scale) {
+		// left half horizontal lines
+		for (int i = scale; originY - i >= 0; i += scale) {
 			g.drawLine(0, originY - i, getWidth(), originY - i);
 		}
 
