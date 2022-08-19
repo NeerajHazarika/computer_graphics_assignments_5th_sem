@@ -1,6 +1,4 @@
 # COMPUTER GRAPHICS ASSIGNMENT
 
-### Steps to install java to wsl 
-1. sudo apt-get update
-2. sudo apt install openjdk-8-jdk
-3. 
+### Read the following to know how to switch between java versions
+https://www.happycoders.eu/java/how-to-switch-multiple-java-versions-windows/
