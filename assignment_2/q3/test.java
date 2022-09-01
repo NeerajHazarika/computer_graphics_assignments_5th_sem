@@ -24,90 +24,96 @@ public class test extends Applet implements ActionListener {
 		g.fillOval(plotpoint_x, plotpoint_y, scale, scale);
 	}
 
-	// Brehensam line drawing algorithm implementation
-	/*
-	 * - This algorithm is an extension to mid point algorithm for using integer
-	 * arithmetic only
-	 * - acc. to it, D (Difference b/w f(x0,y0+1/2) and f(x0,y0)) = dy - 1/2 dx =
-	 * 2dy - dx (since only sign matters for considering case)
-	 * - if D is +ve => choose next point as (x0+1,y0+1) => change in D will be => D
-	 * + 2dy - 2dx
-	 * - otherwise => choose next point as (x0+1,y0) => change in D will be => D +
-	 * 2dy
-	 * - for it to work with negative slop we just need to switch the x0, y0 with
-	 * x1,y1
-	 * - for it to work with slope > 1 we need to switch x and y coordinates
-	 */
-	public void bresenhamlow(Graphics g, int originX, int originY, int dy, int dx, int x1, int y1, int x2, int y2) {
+	void midPoint(Graphics g, int originX, int originY, int X1, int Y1, int X2, int Y2) {
+		// calculate dx & dy
 
-		// dy is always positive to make it compatible with algorithm (pk value)
-		if (dy < 0) {
-			dy = Math.abs(dy);
-		}
+		int dx = X2 - X1;
+		int dy = Y2 - Y1;
 
-		// pk is initial decision making parameter
-		int pk = 2 * dy - dx;
+		// shifting coordinates to applet coordinate
+		X2 = originX + X2 * scale;
+		Y2 = originY - Y2 * scale;
 
-		x1 = originX + x1 * scale;
-		y1 = originY - y1 * scale;
-		x2 = originX + x2 * scale;
-		y2 = originY - y2 * scale;
+		if (dy <= dx) {
 
-		plotpoint(g, x1, y1, Color.red);
+			// keeping dy always positive for algorithm to be compatible to work with Y1>Y2
+			if (dy < 0)
+				dy = -dy;
 
-		for (int i = 0; i < Math.abs(dx); i++) {
+			// initial value of decision parameter d
+			int d = dy - (dx / 2);
+			int x = originX + X1 * scale, y = originY - Y1 * scale;
 
-			x1 += scale;
+			Y1 = originY - Y1 * scale; // shifting Y1 coordinate to applet coordinate as it is being used in later part
+										// of code to compare with Y2 applet coordinate
 
-			if (pk < 0) {
-				plotpoint(g, x1, y1, Color.red);
-				pk = pk + 2 * dy;
-			} else {
-				if (y1 < y2) {
-					y1 += scale;
-				} else {
-					y1 -= scale;
+			// Plot initial given point
+			// putpixel(x,y) can be used to print pixel
+			// of line in graphics
+			plotpoint(g, x, y, Color.red);
+
+			// iterate through value of X
+			while (x < X2) {
+				x += scale;
+
+				// E or East is chosen
+				if (d < 0)
+					d = d + dy;
+
+				// NE or North East is chosen
+				else {
+					d += (dy - dx);
+
+					if (Y1 > Y2) // Y1 & Y2 have already been shifted to applet coordinate, so Y1>Y2 means Y1 is
+									// below Y2
+						y -= scale; // decrease y with scale make y go down in applet coordinate
+					else
+						y += scale;
 				}
 
-				plotpoint(g, x1, y1, Color.red);
-				pk = pk + 2 * dy - 2 * dx;
+				// Plot intermediate points
+				// putpixel(x,y) is used to print pixel
+				// of line in graphics
+				plotpoint(g, x, y, Color.red);
 			}
 		}
-	}
 
-	public void bresenhamhigh(Graphics g, int originX, int originY, int dy, int dx, int x1, int y1, int x2, int y2) {
+		else if (dx < dy) {
+			// initial value of decision parameter d
+			int d = dx - (dy / 2);
+			int x = originX + X1 * scale, y = originY - Y1 * scale;
 
-		// dy is always positive to make it compatible with algorithm (pk value)
-		if (dx < 0) {
-			dx = Math.abs(dx);
-		}
+			X1 = originY + X1 * scale; // shifting X1 coordinate to applet coordinate as it is being used in later part
+										// of code to compare with X2 applet coordinate
 
-		// pk is initial decision making parameter
-		int pk = 2 * dx - dy;
+			// Plot initial given point
+			// putpixel(x,y) can be used to print pixel
+			// of line in graphics
+			plotpoint(g, x, y, Color.red);
 
-		x1 = originX + x1 * scale;
-		y1 = originY - y1 * scale;
-		x2 = originX + x2 * scale;
-		y2 = originY - y2 * scale;
+			// iterate through value of X
+			// y > Y2 means y is below Y2
+			while (y > Y2) {
+				y -= scale;
 
-		plotpoint(g, x1, y1, Color.red);
+				// E or East is chosen
+				if (d < 0)
+					d = d + dx;
 
-		for (int i = 0; i < Math.abs(dy); i++) {
+				// NE or North East is chosen
+				else {
+					d += (dx - dy);
 
-			y1 -= scale; // subtracting scale to increase plotpoint along applet coordinate
-
-			if (pk < 0) {
-				plotpoint(g, x1, y1, Color.red);
-				pk = pk + 2 * dx;
-			} else {
-				if (x1 < x2) {
-					x1 += scale;
-				} else {
-					x1 -= scale;
+					if (X1 < X2)
+						x += scale;
+					else
+						x -= scale;
 				}
 
-				plotpoint(g, x1, y1, Color.red);
-				pk = pk + 2 * dx - 2 * dy;
+				// Plot intermediate points
+				// putpixel(x,y) is used to print pixel
+				// of line in graphics
+				plotpoint(g, x, y, Color.red);
 			}
 		}
 	}
@@ -144,7 +150,13 @@ public class test extends Applet implements ActionListener {
 			g.drawLine(0, originY - i, getWidth(), originY - i);
 		}
 
-		// coordinates to plot line with Bresenham LDA
+		// coordinates to plot line with mid point LDA
+
+		// origin
+		// int x0 = 0;
+		// int y0 = 0;
+		// int x1 = 0;
+		// int y1 = 0;
 
 		// m=1 && x0<x1 && y0<y1
 		// int x0 = 1;
@@ -165,22 +177,22 @@ public class test extends Applet implements ActionListener {
 		// int y1 = -1;
 
 		// m<1 && x0>x1 && y0>y1
-		// int x0 = 3;
-		// int y0 = 3;
-		// int x1 = -3;
-		// int y1 = -1;
+		int x0 = 3;
+		int y0 = 3;
+		int x1 = -3;
+		int y1 = -1;
 
-		// m>1 && x0<x1 && y0>y1
+		// m>1 && x0<x1 && y0<y1
 		// int x0 = -1;
 		// int y0 = -1;
 		// int x1 = 2;
 		// int y1 = 4;
 
 		// m>1 && x0>x1 && y0>y1
-		int x0 = 3;
-		int y0 = 4;
-		int x1 = -1;
-		int y1 = -1;
+		// int x0 = 3;
+		// int y0 = 4;
+		// int x1 = -1;
+		// int y1 = -1;
 
 		/*
 		 * 4 cases :
@@ -192,25 +204,25 @@ public class test extends Applet implements ActionListener {
 		 * switch x and y axis
 		 */
 
-		// bresenham line drawing algo call
+		// midpoint line drawing algo call
 		if (Math.abs(x1 - x0) >= Math.abs(y1 - y0)) {
 			if (x0 <= x1)
-				bresenhamlow(g, originX, originY, y1 - y0, x1 - x0, x0, y0, x1, y1);
+				midPoint(g, originX, originY, x0, y0, x1, y1);
 			else
-				bresenhamlow(g, originX, originY, y0 - y1, x0 - x1, x1, y1, x0, y0); // switching coordinates and
-																						// switching
-																						// slope coordinates
+				midPoint(g, originX, originY, x1, y1, x0, y0); // switching coordinates and
+																// switching
+																// slope coordinates
 		} else {
 			// originX and originY variables arent switched because only theoritically we
 			// switched coordinates for algorithms to plot points on right position on
 			// applet coordinate we need to use the originX for y coordinates and originX
 			// for x coordinates
 			if (y0 <= y1)
-				bresenhamhigh(g, originX, originY, y1 - y0, x1 - x0, x0, y0, x1, y1);
+				midPoint(g, originX, originY, x0, y0, x1, y1);
 			else
-				bresenhamhigh(g, originX, originY, y0 - y1, x0 - x1, x1, y1, x0, y0); // switching coordinates and
-																						// switching
-																						// slope coordinates
+				midPoint(g, originX, originY, x1, y1, x0, y0); // switching coordinates and
+																// switching
+																// slope coordinates
 		}
 	}
 
