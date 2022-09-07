@@ -3,8 +3,6 @@ import java.awt.*;
 import java.awt.event.*;
 import java.lang.Math;
 
-import org.omg.CosNaming._BindingIteratorImplBase;
-
 public class test extends Applet implements ActionListener {
 	// scale (distance between two points in coordinate plane
 	int scale = 20;
