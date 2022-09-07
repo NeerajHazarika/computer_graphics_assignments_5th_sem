@@ -3,6 +3,8 @@ import java.awt.*;
 import java.awt.event.*;
 import java.lang.Math;
 
+import org.omg.CosNaming._BindingIteratorImplBase;
+
 public class test extends Applet implements ActionListener {
 	// scale (distance between two points in coordinate plane
 	int scale = 20;
@@ -22,6 +24,27 @@ public class test extends Applet implements ActionListener {
 		int plotpoint_y = y - scale / 2; // shifting y coordinate to appletcoordinate
 		g.setColor(C);
 		g.fillOval(plotpoint_x, plotpoint_y, scale, scale);
+	}
+
+	public int round(float coordinate, int axis) {
+
+		if (axis == 0) {
+			int prev = (int) (coordinate / scale) * scale;
+			int next = prev + scale;
+
+			if (coordinate - prev < next - coordinate)
+				return prev;
+			else
+				return next;
+		} else {
+			int prev = (int) (coordinate / scale) * scale;
+			int next = prev + scale;
+
+			if (coordinate - prev < next - coordinate)
+				return prev;
+			else
+				return next;
+		}
 	}
 
 	// DDA line drawing algorithm implementation
@@ -53,7 +76,7 @@ public class test extends Applet implements ActionListener {
 		float y = originY - y0 * scale;
 
 		for (int i = 0; i < step; i++) {
-			plotpoint(g, Math.round(x), Math.round(y), Color.red);
+			plotpoint(g, round(x, 0), round(y, 1), Color.red);
 			x += x_incr * scale;
 			y -= y_incr * scale;
 		}
@@ -99,11 +122,29 @@ public class test extends Applet implements ActionListener {
 		}
 
 		// coordinates to plot line with DDA
-		// only works for line in 1st quadrant
-		int x0 = 7;
-		int y0 = 0;
-		int x1 = -2;
-		int y1 = 3;
+		// 1 < m < 0 && x0>x1 && y0<y1
+		// int x0 = 7;
+		// int y0 = 0;
+		// int x1 = -2;
+		// int y1 = 3;
+
+		// 0 < m < 1 && x0<x1 && y0<y1
+		// int x0 = -1;
+		// int y0 = -1;
+		// int x1 = 4;
+		// int y1 = 2;
+
+		// 1 < m && x0<x1 && y0<y1
+		// int x0 = -1;
+		// int y0 = -1;
+		// int x1 = 2;
+		// int y1 = 4;
+
+		// m < -1 && x0>x1 && y0>y1
+		int x0 = -5;
+		int y0 = 3;
+		int x1 = 5;
+		int y1 = -2;
 
 		// DDA line drawing algo call
 		DDALine(g, originX, originY, x0, y0, x1, y1);
