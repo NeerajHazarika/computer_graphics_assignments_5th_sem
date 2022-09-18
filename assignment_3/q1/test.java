@@ -97,17 +97,23 @@ public class test extends Applet implements ActionListener {
 	}
 
 	public void shape(Graphics g) {
-		midPointCircleDraw1(g, 0, 0, 3, Color.red);
-		midPointCircleDraw1(g, 0, 6, 2, Color.red);
-		midPointCircleDraw1(g, -4, -5, 2, Color.red);
-		midPointCircleDraw1(g, 4, -5, 2, Color.red);
-		midPointCircleDraw1(g, 13, 5, 10, Color.red);
-		midPointCircleDraw1(g, -13, 5, 10, Color.red);
-		midPointCircleDraw1(g, 0, -18, 10, Color.red);
-		midPointCircleDraw1(g, 0, 15, 5, Color.red);
-		midPointCircleDraw1(g, 15, -11, 5, Color.red);
-		midPointCircleDraw1(g, -15, -11, 5, Color.red);
-		midPointCircleDraw1(g, 0, -3, 26, Color.red);
+		midPointCircleDraw1(g, 0, 0, 3, Color.red); // center circle
+		midPointCircleDraw1(g, 0, 6, 2, Color.red); // circle above center circle
+		midPointCircleDraw1(g, -4, -5, 2, Color.red); // circle bottom left to center circle
+		midPointCircleDraw1(g, 4, -5, 2, Color.red); // circle bottom right to center circle
+		midPointCircleDraw1(g, 13, 5, 10, Color.red); // circle circle top right to center circle
+		midPointCircleDraw1(g, -13, 5, 10, Color.red); // circle top left to center circle
+		midPointCircleDraw1(g, 0, -18, 10, Color.red); // circle bottom to center circle
+		midPointCircleDraw1(g, 0, 15, 5, Color.red); // circle above(x2) to center center circle
+		midPointCircleDraw1(g, 15, -11, 5, Color.red); // circle bottom right (x2) to center circle
+		midPointCircleDraw1(g, -15, -11, 5, Color.red); // circle bottom right (x2) to center circle
+		midPointCircleDraw1(g, -14, -20, 3, Color.red); // circle below bottom left (x2) to center circle
+		midPointCircleDraw1(g, 14, -20, 3, Color.red); // circle below bottom right (x2) to center circle
+		midPointCircleDraw1(g, 22, -5, 3, Color.red); // circle upper bottom right (x2) to center circle
+		midPointCircleDraw1(g, -22, -5, 3, Color.red); // circle upper bottom left (x2) to center circle
+		midPointCircleDraw1(g, 8, 18, 3, Color.red); // circle upper (x3) right to center circle
+		midPointCircleDraw1(g, -8, 18, 3, Color.red); // circle upper (x3) left to center circle
+		midPointCircleDraw1(g, 0, -3, 26, Color.red); // outer most circle
 	}
 
 	public void paint(Graphics g) {
