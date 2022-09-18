@@ -264,12 +264,12 @@ public class test extends Applet implements ActionListener {
 		}
 
 		// plot candle
-		plotcandle(g, originX, originY);
+		// plotcandle(g, originX, originY);
 
 		// plot fire lines
 		if (flameState == 1) {
 			fire(g, originX, originY);
-			infiniteLoop();
+			// infiniteLoop();
 		}
 	}
 
