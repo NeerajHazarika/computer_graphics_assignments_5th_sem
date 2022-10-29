@@ -135,10 +135,13 @@ public class test extends Applet implements ActionListener, MouseWheelListener {
 
   // Function for the buttons
   public void actionPerformed(ActionEvent e) {
+
     if (e.getSource() == b1)
       zoom(10);
+
     if (e.getSource() == b2)
       zoom(-10);
+
     if (e.getSource() == b3) {
       if (toothFlag == 0)
         toothFlag = 1;
@@ -146,6 +149,7 @@ public class test extends Applet implements ActionListener, MouseWheelListener {
         toothFlag = 0;
       repaint();
     }
+
     if (e.getSource() == b4) {
       if (earShapeFlag == 0)
         earShapeFlag = 1;
@@ -482,6 +486,11 @@ public class test extends Applet implements ActionListener, MouseWheelListener {
       DDALine(g, -20, 2, -45, -17);
       DDALine(g, -29, 16, -49, 21);
     }
+  }
+
+  public void drawBody(Graphics g) {
+    drawSpotBody(g);
+    drawHairBody(g);
   }
 
   public void drawSpotLegArm(Graphics g) {
@@ -827,33 +836,6 @@ public class test extends Applet implements ActionListener, MouseWheelListener {
     }
   }
 
-  public void drawTail(Graphics g) {
-    if (tailShapeFlag == 1) {
-      drawEllipse(g, 10, 6, 28, 0, 25);
-    } else {
-      if (tailShapeFlag == 2) {
-        drawTriangle(g, 15, 5, 18, -5, 45, 15);
-      } else {
-        drawCircle(g, 5, 20, 0);
-        drawCircle(g, 3, 20, 0);
-        DDALine(g, 20, 4, 30, 25);
-        DDALine(g, 22, 4, 36, 23);
-        DDALine(g, 23, 2, 40, 18);
-        DDALine(g, 24, 1, 44, 13);
-        DDALine(g, 24, 0, 47, 8);
-        DDALine(g, 24, -1, 49, -1);
-        DDALine(g, 23, -2, 47, -8);
-        DDALine(g, 22, -3, 45, -15);
-        DDALine(g, 21, -4, 41, -20);
-      }
-    }
-  }
-
-  public void drawBody(Graphics g) {
-    drawSpotBody(g);
-    drawHairBody(g);
-  }
-
   public void drawArmLeg(Graphics g) {
     if (legArmSizeFlag == 0) {
 
@@ -903,6 +885,28 @@ public class test extends Applet implements ActionListener, MouseWheelListener {
       drawEllipse(g, 26, 10, -75, 19, 20); // left upper arm
       drawEllipse(g, 20, 8, -111, 18, 150); // left lower arm
       drawCircle(g, 6, -128, 30); // left hand
+    }
+  }
+
+  public void drawTail(Graphics g) {
+    if (tailShapeFlag == 1) {
+      drawEllipse(g, 10, 6, 28, 0, 25);
+    } else {
+      if (tailShapeFlag == 2) {
+        drawTriangle(g, 15, 5, 18, -5, 45, 15);
+      } else {
+        drawCircle(g, 5, 20, 0);
+        drawCircle(g, 3, 20, 0);
+        DDALine(g, 20, 4, 30, 25);
+        DDALine(g, 22, 4, 36, 23);
+        DDALine(g, 23, 2, 40, 18);
+        DDALine(g, 24, 1, 44, 13);
+        DDALine(g, 24, 0, 47, 8);
+        DDALine(g, 24, -1, 49, -1);
+        DDALine(g, 23, -2, 47, -8);
+        DDALine(g, 22, -3, 45, -15);
+        DDALine(g, 21, -4, 41, -20);
+      }
     }
   }
 
