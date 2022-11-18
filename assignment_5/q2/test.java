@@ -1,7 +1,6 @@
 import java.applet.*;
 import java.awt.*;
 import java.awt.event.*;
-import java.util.*;
 
 public class test extends Applet implements ActionListener {
     int scale = 30;
