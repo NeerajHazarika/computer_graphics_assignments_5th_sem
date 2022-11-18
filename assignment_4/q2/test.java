@@ -11,6 +11,8 @@ public class test extends Applet implements ActionListener, MouseWheelListener {
   int parent1 = 0;
   int parent2 = 0;
   int child = 0;
+  int parent1_features[] = new int[8];
+  int parent2_features[] = new int[8];
 
   Button b1 = new Button(" + ");
   Button b2 = new Button(" - ");
@@ -78,21 +80,10 @@ public class test extends Applet implements ActionListener, MouseWheelListener {
      * 6-7: parent1
      */
 
-    int parent1_features[] = new int[8];
-    int parent2_features[] = new int[8];
-
     if (parent1 == 0) {
       drawShape(g, -400, 0, 0, 0, 0,
           0, 1, 0, 0);
 
-      parent1_features[0] = random_number(0, 2); // toothFlag
-      parent1_features[1] = random_number(0, 2); // earShapeFlag
-      parent1_features[2] = random_number(0, 2); // earSizeFlag
-      parent1_features[3] = random_number(0, 2); // bodySpotFlag
-      parent1_features[4] = random_number(0, 2); // legArmSpotFlag
-      parent1_features[5] = random_number(1, 4); // tailShapeFlag
-      parent1_features[6] = random_number(0, 2); // bodyHairFlag
-      parent1_features[7] = random_number(0, 3); // legArmSizeFlag
     } else {
       drawShape(g, -400, parent1_features[0], parent1_features[1], parent1_features[2], parent1_features[3],
           parent1_features[4], parent1_features[5], parent1_features[6], parent1_features[7]);
@@ -102,18 +93,11 @@ public class test extends Applet implements ActionListener, MouseWheelListener {
       drawShape(g, -200, 0, 0, 0, 0,
           0, 1, 0, 0);
 
-      parent2_features[0] = random_number(0, 2); // toothFlag
-      parent2_features[1] = random_number(0, 2); // earShapeFlag
-      parent2_features[2] = random_number(0, 2); // earSizeFlag
-      parent2_features[3] = random_number(0, 2); // bodySpotFlag
-      parent2_features[4] = random_number(0, 2); // legArmSpotFlag
-      parent2_features[5] = random_number(1, 4); // tailShapeFlag
-      parent2_features[6] = random_number(0, 2); // bodyHairFlag
-      parent2_features[7] = random_number(0, 3); // legArmSizeFlag
-    } else
+    } else {
+
       drawShape(g, -200, parent2_features[0], parent2_features[1], parent2_features[2], parent2_features[3],
           parent2_features[4], parent2_features[5], parent2_features[6], parent2_features[7]);
-
+    }
     if (child == 0) {
       drawShape(g, 0, 0, 0, 0, 0,
           0, 1, 0, 0);
@@ -188,18 +172,36 @@ public class test extends Applet implements ActionListener, MouseWheelListener {
       zoom(-10);
 
     if (e.getSource() == b3) {
-      if (parent1 == 0)
+      if (parent1 == 0) {
         parent1 = 1;
-      else
+        parent1_features[0] = random_number(0, 2); // toothFlag
+        parent1_features[1] = random_number(0, 2); // earShapeFlag
+        parent1_features[2] = random_number(0, 2); // earSizeFlag
+        parent1_features[3] = random_number(0, 2); // bodySpotFlag
+        parent1_features[4] = random_number(0, 2); // legArmSpotFlag
+        parent1_features[5] = random_number(1, 4); // tailShapeFlag
+        parent1_features[6] = random_number(0, 2); // bodyHairFlag
+        parent1_features[7] = random_number(0, 3); // legArmSizeFlag
+      } else {
         parent1 = 0;
+      }
       repaint();
     }
 
     if (e.getSource() == b4) {
-      if (parent2 == 0)
+      if (parent2 == 0) {
         parent2 = 1;
-      else
+        parent2_features[0] = random_number(0, 2); // toothFlag
+        parent2_features[1] = random_number(0, 2); // earShapeFlag
+        parent2_features[2] = random_number(0, 2); // earSizeFlag
+        parent2_features[3] = random_number(0, 2); // bodySpotFlag
+        parent2_features[4] = random_number(0, 2); // legArmSpotFlag
+        parent2_features[5] = random_number(1, 4); // tailShapeFlag
+        parent2_features[6] = random_number(0, 2); // bodyHairFlag
+        parent2_features[7] = random_number(0, 3); // legArmSizeFlag
+      } else {
         parent2 = 0;
+      }
       repaint();
     }
 

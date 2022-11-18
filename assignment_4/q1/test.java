@@ -17,7 +17,7 @@ public class test extends Applet implements ActionListener, MouseWheelListener {
   int legArmSizeFlag = 0;
   Button b1 = new Button(" + ");
   Button b2 = new Button(" - ");
-  Button b3 = new Button(" Tooth ");
+  Button b3 = new Button(" Beak Shape ");
   Button b4 = new Button(" Ear Shape ");
   Button b5 = new Button(" Ear Size ");
   Button b6 = new Button(" Body Spot ");
