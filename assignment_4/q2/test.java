@@ -13,6 +13,8 @@ public class test extends Applet implements ActionListener, MouseWheelListener {
   int child = 0;
   int parent1_features[] = new int[8];
   int parent2_features[] = new int[8];
+  int parent1_features[] = new int[8];
+  int parent2_features[] = new int[8];
 
   Button b1 = new Button(" + ");
   Button b2 = new Button(" - ");
